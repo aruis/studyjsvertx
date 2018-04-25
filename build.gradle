@@ -21,6 +21,7 @@ dependencies {
     compile "io.vertx:vertx-core:$vertx_version"
     compile "io.vertx:vertx-lang-js:$vertx_version"
     compile "io.vertx:vertx-web:$vertx_version"
+    compile "io.vertx:vertx-zookeeper:$vertx_version"
 }
 
 processResources {
