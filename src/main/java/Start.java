@@ -8,7 +8,7 @@ public class Start {
     public static void main(String[] args) {
 
         JsonObject zkConfig = new JsonObject();
-        zkConfig.put("zookeeperHosts", "192.168.0.88:2181,192.168.0.88:2182,192.168.0.88:2183");
+        zkConfig.put("zookeeperHosts", "202.98.195.154:9081");
         zkConfig.put("rootPath", "io.vertx");
         zkConfig.put("retry", new JsonObject()
                 .put("initialSleepTime", 3000)
@@ -20,7 +20,7 @@ public class Start {
             if (res.succeeded()) {
                 System.out.println("connect zookeeper success.");
                 Vertx vertx = res.result();
-                vertx.deployVerticle("/Users/liurui/develop/workspace-study/studyjsvertx/src/main/js/receiver.js");
+                vertx.deployVerticle("receiver.js");
             } else {
                 System.out.println("connect zookeeper error.");
             }

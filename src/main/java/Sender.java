@@ -9,14 +9,16 @@ public class Sender {
     public static void main(String[] args) {
 
         JsonObject zkConfig = new JsonObject();
-        zkConfig.put("zookeeperHosts", "192.168.0.88:2181,192.168.0.88:2182,192.168.0.88:2183");
+        zkConfig.put("zookeeperHosts", "202.98.195.154:9081");
         zkConfig.put("rootPath", "io.vertx");
         zkConfig.put("retry", new JsonObject()
                 .put("initialSleepTime", 3000)
                 .put("maxTimes", 3));
 
         ClusterManager mgr = new ZookeeperClusterManager(zkConfig);
-        VertxOptions options = new VertxOptions().setClusterManager(mgr);
+        VertxOptions options = new VertxOptions()
+                .setClustered(true)
+                .setClusterManager(mgr);
         Vertx.clusteredVertx(options, res -> {
             if (res.succeeded()) {
                 System.out.println("connect zookeeper success.");
@@ -25,7 +27,7 @@ public class Sender {
                 EventBus eb = vertx.eventBus();
                 vertx.setPeriodic(1000, v -> {
 
-                    eb.send("ping-address", "ping!", reply -> {
+                    eb.send("ping-address", "hello ,this is LiuRui From JAVA", reply -> {
                         if (reply.succeeded()) {
                             System.out.println("Received reply " + reply.result().body());
                         } else {
